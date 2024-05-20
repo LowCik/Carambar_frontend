@@ -25,41 +25,42 @@
 
     <script>
       const jokeId = document.getElementById("jokeId");
-const textJoke= document.getElementById("jokeText");
+      const textJoke= document.getElementById("jokeText");
+
       document
         .getElementById("jokeButton")
         .addEventListener("click", async () => {
           const response = await fetch(
-            "http://localhost:3000/jokes/random"
+            "https://exo-carambar-2.onrender.com/jokes/random"
           );
           const joke = await response.json();
           document.getElementById("jokeText").textContent = joke.text;
         });
+
       // 
       document
         .getElementById("submit_jokeId")
         .addEventListener("click", async () => {
-          console.log("id,", jokeId.value);
           if (
-            jokeId.value > 0 &&
-            fetch("http://localhost:3000/jokes_count") > jokeId.value
+            jokeId.value > 0 
           ) {
-            const response = await fetch(
-              `http://localhost:3000/jokes/${jokeId.value}`
+            const response = await fetch( 
+              `https://exo-carambar-2.onrender.com/jokes/${jokeId.value}`
             );
+          if (response.ok){
             const joke = await response.json();
+            
             document.getElementById("jokeText").textContent = joke.text;
-            console.log(
-              "count,",
-              await fetch(`http://localhost:3000/jokes_count`)
-            );
+          } else if (response.status === 404){
+            document.getElementById("jokeText").textContent = "Désolé, pas de blague ici ! >:(";
+          }
           }
         });
       document
         .getElementById("allTheJokes")
         .addEventListener("click", async () => {
           const response = await fetch(
-            "http://localhost:3000/jokes/text" // http://localhost:3000/jokes/random
+            "https://exo-carambar-2.onrender.com/jokes" // http://localhost:3000/jokes/random
           );
           const allJokes = await response.json();
 
@@ -75,14 +76,15 @@ const textJoke= document.getElementById("jokeText");
             docu.appendChild(child);
           });
         });
-        document
-        .getElementById("addAJoke")
-        .addEventListener("click", async () => {
-          const response = await fetch(
-            "http://localhost:3000/jokes/add"
-          );
-          document.getElementById("jokeText").textContent = "You added a new joke !";
-        });
+        // document
+        // .getElementById("addAJoke")
+        // .addEventListener("click", async () => {
+        //   const response = await fetch(
+        //     "https://exo-carambar-2.onrender.com/jokes/add"
+        //   );
+        //   document.getElementById("jokeText").textContent = "You added a new joke !";
+        // });
+        //oui
     </script>
   </body>
 </html>
