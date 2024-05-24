@@ -1,4 +1,4 @@
-Petit HTML fait dans le theme Carambar.
+Petit HTML / CSS fait dans le theme Carambar.
 
 Lien API : https://exo-carambar-2.onrender.com
 
